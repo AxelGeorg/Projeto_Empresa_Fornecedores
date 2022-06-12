@@ -27,6 +27,7 @@
     {% comment %} https://igorescobar.github.io/jQuery-Mask-Plugin/ {% endcomment %}
     <script>
         $(document).ready(function(){
+            $("#id_cpfResponsavelLegal").mask('000.000.000-00', {reverse: true});
             $("#id_cnpj").mask('00.000.000/0000-00', {reverse: true});
 
             var SPMaskBehavior = function (val) {
