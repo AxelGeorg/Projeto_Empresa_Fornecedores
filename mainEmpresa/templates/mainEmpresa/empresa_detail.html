@@ -1,0 +1,21 @@
+{% extends 'mainEmpresa/base.html' %}
+
+{% block title %} Detalhes {% endblock %}
+{% block titleBody %}Empresa{% endblock %}
+
+{% block content %}
+<a href="{% url 'mainEmpresa:list' %}"><input type="submit" class="btn btn-secondary" value="Voltar" /></a>
+<div style="text-align:center; margin-left: 25%; margin-right: 25%">
+    <h2>{{empresa.razaoSocial}}</h2>
+    <p>Nome Fantasia: {{empresa.nomeFantasia}}</p>
+    <p>CNPJ: {{empresa.cnpj}}</p>
+    <p>Endereço: {{empresa.endereco}}</p>
+    <p>Telefone: {{empresa.telefone}}</p>
+    <p>Cidade: {{empresa.cidade}}</p>
+    <p>UF: {{empresa.uF.value}}</p>
+    <p>Nome Responsavel Legal: {{empresa.nomeResponsavelLegal}}</p>
+    <p>CPF Responsavel Legal: {{empresa.cpfResponsavelLegal}}</p>
+</div>
+{% endblock %}
+
+

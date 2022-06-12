@@ -1,0 +1,33 @@
+{% load static %}
+
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+
+<body>
+    <div id="header" style="text-align: center">
+        <h1><a>
+            {% block titleBody %}{% endblock %}
+        </a></h1>
+        <hr style="text-align:center;border: 0.5px solid black; margin-left: 5%; margin-right: 5%">
+    </div>
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="footer"></div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

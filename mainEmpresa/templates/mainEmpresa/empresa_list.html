@@ -1,0 +1,52 @@
+{% extends 'mainEmpresa/base.html' %}
+{% load static %}
+
+{% block title %} Lista de Empresas {% endblock %}
+{% block titleBody %}Empresa{% endblock %}
+
+{% block content %}
+    {% if not empresa_list %}
+    <div style="text-align: center">
+        <a href="{% url 'mainEmpresa:create' %}"><input type="submit" class="btn btn-secondary" value="Cadastrar Empresa" /></a>
+    </div> 
+    {% endif %}
+    
+    <ul>
+        <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Razão Social</th>
+                        <th>CNPJ</th>
+                        <th>Telefone</th>
+                        <th>UF</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+                
+				<tbody>
+                {% for empresa in empresa_list %}
+                    <tr>
+                        <td>{{empresa.razaoSocial}} </td>
+                        <td>{{empresa.cnpj}} </td>
+                        <td>{{empresa.telefone}} </td>
+                        <td>{{empresa.uF.value}} </td>
+                        <td>  <a href="{% url 'mainEmpresa:update' pk=empresa.id %}" title="Editar Empresa">Editar</a> 
+                            - <a href="{% url 'mainEmpresa:detail' pk=empresa.id %}" title="Vizualizar Empresa">Vizualizar</a>
+                            - <a href="{% url 'mainEmpresa:delete' pk=empresa.id %}" title="Remover Empresa">Deletar</a>
+                            - <a href="{% url 'mainFornecedor:list' %}" title="Fornecedores Vinculados">Fornecedores</a> </td>
+                        </li>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Nenhuma Empresa registrada.</td>
+                    <tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </ul>
+{% endblock %}
+
+

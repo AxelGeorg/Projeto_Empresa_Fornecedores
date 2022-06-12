@@ -1,0 +1,78 @@
+{% extends 'mainEmpresa/base.html' %}
+{% load static %}
+
+{% block title %} Lista de Fornecedor {% endblock %}
+{% block titleBody %}Fornecedor{% endblock %}
+
+{% block content %}
+    <div style="text-align: center">
+        <a href="{% url 'mainFornecedor:create' %}"><input type="submit" class="btn btn-secondary" value="Cadastrar Fornecedor" /></a>
+    </div>
+
+    <ul>
+        <div class="table-responsive" style="margin-right: 2%">
+            <hr>
+                <form action="?" method="GET">
+                    <input type="text" name="nomeEmpresa" id="" value="{{ request.GET.nome }}" class="p-1 border" autocomplete="off" placeholder="Nome ou parte dele">
+                    <input type="text" name="cpf" id="cpf" value="{{ request.GET.cpf }}" class="p-1 border" autocomplete="off" placeholder="CPF ou parte dele">
+                    <input type="text" name="cnpj" id="cnpj" value="{{ request.GET.cnpj }}" class="p-1 border" autocomplete="off" placeholder="CNPJ ou parte dele">
+                    <a><input type="submit" class="btn btn-secondary" value="Buscar" /></a>
+                    <a href="{% url 'mainFornecedor:list' %}"><input type="submit" class="btn btn-secondary" value="Limpar" /></a>
+                </form>
+            <hr>
+
+            <table class="table table-striped" id="listar-fornecedores">
+                <thead>
+                    <tr>
+                        <th>Nome Empresa</th>
+                        <th>Telefone</th>
+                        <th>UF</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Data Alteração</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for fornecedor in fornecedor_list %}
+                        <tr>
+                            <td>{{fornecedor.nomeEmpresa}}</td>
+                            <td>{{fornecedor.telefone}}</td>
+                            <td>{{fornecedor.uF.value}}</td>
+                            {% if fornecedor.cnpj %}
+                                <td>{{fornecedor.cnpj}}</td>
+                            {% else %}
+                                <td>{{fornecedor.cpf}}</td>
+                            {% endif %}
+                            <td>{{fornecedor.dataHoraAlteracao}}</td>
+                            <td>  <a href="{% url 'mainFornecedor:update' pk=fornecedor.id %}" title="Editar Fornecedor">Editar</a> 
+                                - <a href="{% url 'mainFornecedor:detail' pk=fornecedor.id %}" title="Vizualizar Fornecedor">Vizualizar</a>
+                                - <a href="{% url 'mainFornecedor:delete' pk=fornecedor.id %}" title="Deletar Fornecedor">Deletar</a></td>
+                            </li>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Nenhum fornecedor registrado.</td>
+                        <tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </ul>
+
+    <div style="text-align: center">
+        <a href="{% url 'mainEmpresa:list' %}"><input type="submit" class="btn btn-secondary" value="Voltar" /></a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery.mask.min.js' %}"></script>
+
+    {% comment %} https://igorescobar.github.io/jQuery-Mask-Plugin/ {% endcomment %}
+    <script>
+        $(document).ready(function(){
+            $("#cpf").mask('000.000.000-00', {reverse: true});
+            $("#cnpj").mask('00.000.000/0000-00', {reverse: true});
+        });
+    </script>
+{% endblock %}

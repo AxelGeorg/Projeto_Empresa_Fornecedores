@@ -1,0 +1,25 @@
+{% extends 'mainEmpresa/base.html' %}
+{% load static %}
+
+{% block title %} Detalhes {% endblock %}
+{% block titleBody %}Fornecedor{% endblock %}
+
+{% block content %}
+<a href="{% url 'mainFornecedor:list' %}"><input type="submit" class="btn btn-secondary" value="Voltar" /></a>
+<div style="text-align:center; margin-left: 25%; margin-right: 25%">
+    <h2>{{fornecedor.nomeEmpresa}}</h2>
+    <p>CNPJ: {{fornecedor.cnpj}}</p>
+    <p>CPF: {{fornecedor.cpf}}</p>
+    <p>RG: {{fornecedor.rg}}</p>
+    <p>Data de Nascimento: {{fornecedor.data_nascimento}}</p>
+    <p>Endereço: {{fornecedor.endereco}}</p>
+    <p>Telefone: {{fornecedor.telefone}}</p>
+    <p>Cidade: {{fornecedor.cidade}}</p>
+    <p>UF: {{fornecedor.uF.value}}</p>
+    <p>Pessoa Contato: {{fornecedor.pessoaContato}}</p>
+    <p>Data Hora Cadastro: {{fornecedor.dataHoraCadastro}}</p>
+    <p>Data Hora Altereção: {{fornecedor.dataHoraAlteracao}}</p>
+</div>
+{% endblock %}
+
+

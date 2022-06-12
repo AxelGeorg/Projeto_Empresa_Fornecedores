@@ -1,0 +1,16 @@
+{% extends 'mainEmpresa/base.html' %}
+{% load static %}
+
+{% block title %}Remover Fornecedor{% endblock %}
+{% block titleBody %}Remover Registro{% endblock %}
+
+{% block content %}
+<div style="text-align:center; margin-left: 80px">
+    <form method="post" action"post">
+        <h3>Deseja remover o registro de fornecedor: <strong>{{fornecedor.nomeEmpresa}}</strong></h3>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Sim, tenho certeza">
+        <input type="reset" class="btn btn-secondary" value="Calcelar" onclick="location.href = '{% url 'mainFornecedor:list' %}'">
+    </form>
+</div>
+{% endblock %}
