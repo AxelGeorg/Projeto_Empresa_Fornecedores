@@ -4,7 +4,7 @@
 {% block titleBody %}Empresa{% endblock %}
 
 {% block content %}
-<a href="{% url 'mainEmpresa:list' %}"><input type="submit" class="btn btn-secondary" value="Voltar" /></a>
+<a style="margin-left: 5%" href="{% url 'mainEmpresa:list' %}"><input type="submit" class="btn btn-secondary" value="Voltar" /></a>
 <div style="text-align:center; margin-left: 25%; margin-right: 25%">
     <h2>{{empresa.razaoSocial}}</h2>
     <p>Nome Fantasia: {{empresa.nomeFantasia}}</p>

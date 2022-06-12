@@ -39,13 +39,16 @@ class FornecedorDetail(DetailView):
     fields = '__all__'
 
 
-# def verificar_data(data):
-#     data = data.today()
-#     today = date.today()
-#     if (today.year - data.year - ((today.month, today.day) < (data.month, data.day))) >= 18:
-#         return True
-#     else:
-#         return False
+def verificar_data(data):
+    if data:
+        data = datetime.strptime(data, "%d/%m/%Y")
+        today = date.today()
+        if (today.year - data.year - ((today.month, today.day) < (data.month, data.day))) >= 18:
+            return True
+        else:
+            return False
+
+    return True
 
 
 class FornecedorCreate(CreateView):
@@ -58,16 +61,12 @@ class FornecedorCreate(CreateView):
         context["tituloPagina"] = "Cadastrar"
         return context
 
-    # def form_valid(self, form):
-
-    #     print(type(form.data_nascimento))
-
-    #     if verificar_data(self.request.GET.get('data_nascimento')) == True:
-    #         form.add_error('data_nascimento', ValidationError(
-    #             f"Fornecedor não pode ser menor de idade"))
-    #         return self.render_to_response(self.get_context_data(form=form))
-
-    #     return super().form_valid(form)
+    def form_valid(self, form):
+        if verificar_data(form.data['data_nascimento']) == False:
+            form.add_error('data_nascimento', ValidationError(
+                f"Fornecedor não pode ser menor de idade."))
+            return self.render_to_response(self.get_context_data(form=form))
+        return super().form_valid(form)
 
 
 class FornecedorUpdate(UpdateView):
@@ -79,6 +78,13 @@ class FornecedorUpdate(UpdateView):
         context = super().get_context_data(*args, **kwargs)
         context["tituloPagina"] = "Editar"
         return context
+
+    def form_valid(self, form):
+        if verificar_data(form.data['data_nascimento']) == False:
+            form.add_error('data_nascimento', ValidationError(
+                f"Fornecedor não pode ser menor de idade."))
+            return self.render_to_response(self.get_context_data(form=form))
+        return super().form_valid(form)
 
 
 class FornecedorDelete(DeleteView):

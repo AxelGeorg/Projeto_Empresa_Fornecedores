@@ -5,7 +5,7 @@
 {% block titleBody %}Fornecedor{% endblock %}
 
 {% block content %}
-<a href="{% url 'mainFornecedor:list' %}"><input type="submit" class="btn btn-secondary" value="Voltar" /></a>
+<a style="margin-left: 5%" href="{% url 'mainFornecedor:list' %}"><input type="submit" class="btn btn-secondary" value="Voltar" /></a>
 <div style="text-align:center; margin-left: 25%; margin-right: 25%">
     <h2>{{fornecedor.nomeEmpresa}}</h2>
     <p>CNPJ: {{fornecedor.cnpj}}</p>
